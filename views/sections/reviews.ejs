@@ -1,0 +1,68 @@
+<div class="reviews">
+  <% reviews = reviews.map(review => {
+    let ratingStars;
+    if (review.rating === 5) {
+      ratingStars = '<div class="review-rating">' +
+        '<i class="fas fa-star"></i>' +
+        '<i class="fas fa-star"></i>' +
+        '<i class="fas fa-star"></i>' +
+        '<i class="fas fa-star"></i>' +
+        '<i class="fas fa-star"></i>' +
+        '</div>';
+    } else if (review.rating === 4) {
+      ratingStars = '<div class="review-rating">' +
+        '<i class="fas fa-star"></i>' +
+        '<i class="fas fa-star"></i>' +
+        '<i class="fas fa-star"></i>' +
+        '<i class="fas fa-star"></i>' +
+        '<i class="far fa-star"></i>' +
+        '</div>';
+    } else if (review.rating === 3) {
+      ratingStars = '<div class="review-rating">' +
+        '<i class="fas fa-star"></i>' +
+        '<i class="fas fa-star"></i>' +
+        '<i class="fas fa-star"></i>' +
+        '<i class="far fa-star"></i>' +
+        '<i class="far fa-star"></i>' +
+        '</div>';
+    } else {
+      ratingStars = '';
+    }
+
+    // Reformat Date
+    let date = review.time_created.split(" ");
+    date = date[0];
+    date = date.split('-');
+    let year = date.shift();
+    date.push(year);
+    date = date.join('-');
+    while(date.charAt(0) === '0') {
+      date = date.substr(1);
+    }
+
+    return '<div class="review">' +
+        '<div class="review-left">' +
+          '<img class="review-image" src="' + review.user.image_url + '"/>' +
+          '<p class="review-user-name">' + review.user.name + '</p>' +
+        '</div>' +
+        '<div class="review-right">' +
+          '<p class="review-time">' + date + '</p>' +
+          '<p class="review-text">' + review.text + '<span><a class="review-link" href="' + review.url + '" target="_blank">read more.</a></span></p>' +
+        '</div>' +
+      '</div>' +
+      ratingStars
+  }) -%>
+  <div class="reviews-title">
+    <div class="reviews-title-left">
+      <i class="fab fa-yelp fa-3x" style="color: red"></i>
+    </div>
+    <div class="reviews-title-middle">
+      <h1>Reviewed on Yelp</h1>
+    </div>
+    <div class="reviews-title-right">
+
+    </div>
+  </div>
+  <%- reviews.join(" ") %>
+  <div class="reviews-button"><a class="review-button-text" href="https://www.yelp.com/biz/e-and-e-automotive-services-houston" target="_blank">Leave us a review</a></div>
+</div>
